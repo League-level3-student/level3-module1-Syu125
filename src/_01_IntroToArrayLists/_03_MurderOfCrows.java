@@ -26,6 +26,9 @@ public class _03_MurderOfCrows {
     }
 
     private void findTheDiamond() {
+   for(Crow crow:theMurder) {
+	   ArrayList<Crow>getStomachContents;
+   }
         /*
          * 1. One of the Crows has eaten the diamond. You need to search through the stomach of each Crow, 
          * then print the name of the guilty Crow.
