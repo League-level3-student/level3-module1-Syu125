@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>149833__sempain__01-crash-into-me-dave-matthews-band-cover.mp3</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/149833__sempain__01-crash-into-me-dave-matthews-band-cover.mp3</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

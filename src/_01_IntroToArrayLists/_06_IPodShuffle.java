@@ -16,6 +16,10 @@ public class _06_IPodShuffle implements ActionListener{
 	JFrame f = new JFrame();
 	JPanel p = new JPanel();
 	JButton b= new JButton();
+	Song play;
+	Random r = new Random();	
+	ArrayList<Song> songs = new ArrayList<Song>();
+int playSong = r.nextInt(5);
 	public _06_IPodShuffle(){
 		// 1. Use the Song class to play the demo.mp3 file.
 			
@@ -31,28 +35,12 @@ public class _06_IPodShuffle implements ActionListener{
 	}
 	
 	public static void main(String[] args) {
-		
-		Song Ca = new Song("demo.mp3");
-		Song Cb = new Song("Cc.wav");
-		Song Cc = new Song("");
-		Song Cd = new Song("");
-		Song Ce = new Song(""); 
 		_06_IPodShuffle iPod = new _06_IPodShuffle();
 		iPod.run();
-		ArrayList<Song> songs = new ArrayList<Song>();
-		songs.add(Ca);
-		songs.add(Cb);
-		songs.add(Cc);
-		songs.add(Cd);
-		songs.add(Ce);
-		Cb.play();
-		
+		iPod.song();
 	}
 	void run() {
 	
-		Random r = new Random();
-		int playSong = r.nextInt(5);
-		
 		f.add(p);
 		p.add(b);
 		f.setVisible(true);
@@ -61,16 +49,37 @@ public class _06_IPodShuffle implements ActionListener{
 		b.setText("Surprise Me!");
 		b.addActionListener(this);
 		f.pack();
-	}
-	void songPlay() {
+		
+		songs.add(new Song("demo.mp3"));
+		songs.add(new Song("187950__soundmatch24__rnb-beat.mp3"));
+		songs.add(new Song("425556__planetronik__rock-808-beat.mp3"));
+		songs.add(new Song("72104__dustkut__click-beat-1.mp3"));
+		songs.add(new Song("440059__nerdychick1217__magix-beat-3.mp3"));
 		
 	}
+	void song() {
+	
+		
+	playSong = r.nextInt(5);
+	play = songs.get(playSong);
+}
+	
+
+	void songPlay() {
+			play.play();
+	}
+	void stopSong() {
+		play.stop();
+}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==b) {
+			stopSong();
+			song();
+			songPlay();
 			
+			}
 		}
 	}
-}
