@@ -15,9 +15,9 @@ public class IntegerStack {
 		//A. create a new array that is one element larger than the member array
 		int[] a = new int[ie.length+1];
 		//B. set the last element of the new array equal to the integer passed into the method
-		a[ie.length+1] = v;
+		a[a.length-1] = v;
 		//C. iterate through the member array and copy all the elements into the new array
-		for(int i = 0; i<ie.length+1; i++) {
+		for(int i = 0; i<a.length-1; i++) {
 			a[i] = ie[i];
 		}
 		//D. set the member array equal to the new array.
@@ -39,20 +39,20 @@ public class IntegerStack {
 			a2[j] = ie[j];
 		}
 		//D. set the member array equal to the new array
-		
+		ie = a2;
 		//E. return the variable you created in step A
-		return 0;
+		return int2;
 	}
 	
 	//5. Complete the clear method to set the
 	//   member array to a new array of length 0
 	public void clear() {
-		
+		ie = new int[0];
 	}
 	
 	//6. Complete the size array to return 
 	//   the length of the member array
 	public int size() {
-		return 0;
+		return ie.length;
 	}
 }

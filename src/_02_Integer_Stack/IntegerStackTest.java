@@ -22,8 +22,8 @@ class IntegerStackTest {
 		assertEquals(0, is.pop());
 	}
 	
-//	@Test
-	/*void testClear() {
+@Test
+	void testClear() {
 		IntegerStack is = new IntegerStack();
 		is.push(0);
 		is.push(1);
@@ -32,6 +32,6 @@ class IntegerStackTest {
 		is.push(4);
 		is.clear();
 		assertEquals(0, is.size());
-	}*/
+	}
 
 }
