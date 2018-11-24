@@ -14,19 +14,26 @@ public class HangMan implements KeyListener {
 	Stack<String> answers = new Stack<String>();
 	JLabel[] labels;
 	JLabel[] labels2;
+	JLabel lives;
 	String word;
 	Character letter;
+	Character Let;
 	JFrame f = new JFrame();
 	JPanel p = new JPanel();
 	Character[] c;
 	int count;
 	int characters;
-	Character [] overlap;
+	int life;
+	Character[] overlap;
+	static Boolean fake;
+	static Boolean correct;
 
 	public static void main(String[] args) {
 		HangMan hm = new HangMan();
 		hm.startup();
 		hm.play();
+		fake = false;
+		correct = false;
 	}
 
 	void startup() {
@@ -41,14 +48,17 @@ public class HangMan implements KeyListener {
 
 	void play() {
 		word = answers.pop();
+		life = 10;
 		characters = word.length();
 		labels = new JLabel[characters];
 		labels2 = new JLabel[characters];
+		lives = new JLabel();
+		lives.setText("     Lives: " + life);
 		f.add(p);
 		f.setVisible(true);
 		p.setVisible(true);
 		f.addKeyListener(this);
-		c = new Character[characters];	
+		c = new Character[characters];
 		System.out.println(characters);
 		for (int i = 0; i < characters; i++) {
 			labels[i] = new JLabel();
@@ -56,10 +66,12 @@ public class HangMan implements KeyListener {
 			p.add(labels[i]);
 			c[i] = word.charAt(i);
 			labels2[i].setText(c[i].toString());
-			labels[i].setText("_");	
+			labels[i].setText("_");
 			labels[i].setVisible(true);
-		
+
 		}
+		p.add(lives);
+		lives.setVisible(true);
 		f.pack();
 	}
 
@@ -69,35 +81,55 @@ public class HangMan implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-	
+
 		// TODO Auto-generated method stub
-	
+
 	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-	letter = e.getKeyChar();
-	overlap = new Character[characters];
+fake = true;
+		letter = e.getKeyChar();
+		overlap = new Character[characters];
+
 		for (int i = 0; i < characters; i++) {
 			if (letter.equals(c[i])) {
-			overlap[i] = new Character(letter);
-				labels[i].setText(labels2[i].getText());
-				System.out.println("hi");
-				for(int j = 0; j < characters; j++) {
-				if(!letter.equals(overlap[i])) {
-					count+=1;
+				fake = false;
+				for (int j = 0; j < characters; j++) {
+					overlap[i] = new Character(letter);
+
+					if (!letter.equals(overlap[j])) {
+						labels[i].setText(labels2[i].getText());
+						correct = true;
+					} else {
+					}
 				}
-				}
+			} 
+		}
+		if (count == characters) {
+			for (int k = 0; k < characters; k++) {
+				p.remove(labels[k]);
+				p.remove(labels2[k]);
 			}
-				
-			if(count == characters) {
-				play();
+			play();
+			count = 0;
+			p.remove(lives);
+			life = 0;
+		}
+		if (fake) {
+			life -= 1;
+			lives.setText("     Lives: " + life);
+			if (life == 0) {
+				lives.setText("     Lives: " + life);
+				JOptionPane.showMessageDialog(null, "GAME OVER");
 			}
 		}
-
+		if(correct) {
+			count+=1;
+			System.out.println(count);
+		}
 	}
-	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
