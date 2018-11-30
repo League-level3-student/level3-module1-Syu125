@@ -12,12 +12,14 @@ import javax.swing.JPanel;
 
 public class HangMan implements KeyListener {
 	Stack<String> answers = new Stack<String>();
+	ArrayList<Character> alph = new ArrayList<Character>();
 	JLabel[] labels;
 	JLabel[] labels2;
 	JLabel lives;
 	String word;
 	Character letter;
 	Character Let;
+	Character l;
 	JFrame f = new JFrame();
 	JPanel p = new JPanel();
 	Character[] c;
@@ -44,6 +46,7 @@ public class HangMan implements KeyListener {
 			word = Utilities.readRandomLineFromFile("dictionary.txt");
 			answers.push(word);
 		}
+
 	}
 
 	void play() {
@@ -55,6 +58,7 @@ public class HangMan implements KeyListener {
 		lives = new JLabel();
 		lives.setText("     Lives: " + life);
 		f.add(p);
+		p.add(lives);
 		f.setVisible(true);
 		p.setVisible(true);
 		f.addKeyListener(this);
@@ -89,33 +93,47 @@ public class HangMan implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-fake = true;
+		fake = true;
 		letter = e.getKeyChar();
 		overlap = new Character[characters];
-
+		alph.add(letter);
 		for (int i = 0; i < characters; i++) {
 			if (letter.equals(c[i])) {
+				overlap[i] = new Character(letter);
 				fake = false;
-				for (int j = 0; j < characters; j++) {
-					overlap[i] = new Character(letter);
 
-					if (!letter.equals(overlap[j])) {
-						labels[i].setText(labels2[i].getText());
-						correct = true;
-					} else {
+				for (int k = 0; k < alph.size(); k++) {
+					System.out.println("hi");
+					if (!letter.equals(alph.get(k))) {
+
+						for (int j = 0; j < characters; j++) {
+
+							if (!letter.equals(overlap[j])) {
+								labels[i].setText(labels2[i].getText());
+								correct = true;
+							} else {
+							}
+						}
 					}
 				}
-			} 
+
+			}
 		}
+
 		if (count == characters) {
 			for (int k = 0; k < characters; k++) {
 				p.remove(labels[k]);
 				p.remove(labels2[k]);
+				p.remove(lives);
+				f.remove(p);
+				lives.removeAll();
 			}
-			play();
 			count = 0;
 			p.remove(lives);
-			life = 0;
+			life = 10;
+			play();
+			fake = true;
+
 		}
 		if (fake) {
 			life -= 1;
@@ -123,10 +141,12 @@ fake = true;
 			if (life == 0) {
 				lives.setText("     Lives: " + life);
 				JOptionPane.showMessageDialog(null, "GAME OVER");
+				f.dispose();
 			}
 		}
-		if(correct) {
-			count+=1;
+		if (correct) {
+			count += 1;
+			correct = false;
 			System.out.println(count);
 		}
 	}
