@@ -25,7 +25,7 @@ public class HangMan implements KeyListener {
 	Character[] c;
 	int count;
 	int characters;
-	int life;
+	int life = 10;
 	Character[] overlap;
 	static Boolean fake;
 	static Boolean correct;
@@ -45,13 +45,13 @@ public class HangMan implements KeyListener {
 		for (int i = 0; i < w; i++) {
 			word = Utilities.readRandomLineFromFile("dictionary.txt");
 			answers.push(word);
-		}
 
+		}
+		f.addKeyListener(this);
 	}
 
 	void play() {
 		word = answers.pop();
-		life = 10;
 		characters = word.length();
 		labels = new JLabel[characters];
 		labels2 = new JLabel[characters];
@@ -61,7 +61,7 @@ public class HangMan implements KeyListener {
 		p.add(lives);
 		f.setVisible(true);
 		p.setVisible(true);
-		f.addKeyListener(this);
+
 		c = new Character[characters];
 		System.out.println(characters);
 		for (int i = 0; i < characters; i++) {
@@ -87,21 +87,17 @@ public class HangMan implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		fake = true;
 		letter = e.getKeyChar();
 		overlap = new Character[characters];
 		alph.add(letter);
+		int correctMatches = 0;
 		for (int i = 0; i < characters; i++) {
 			if (letter.equals(c[i])) {
+
 				overlap[i] = new Character(letter);
 				fake = false;
-
+				correctMatches++;
 				for (int k = 0; k < alph.size(); k++) {
 					System.out.println("hi");
 					if (!letter.equals(alph.get(k))) {
@@ -111,6 +107,7 @@ public class HangMan implements KeyListener {
 							if (!letter.equals(overlap[j])) {
 								labels[i].setText(labels2[i].getText());
 								correct = true;
+
 							} else {
 							}
 						}
@@ -120,6 +117,20 @@ public class HangMan implements KeyListener {
 			}
 		}
 
+		if (fake) {
+			life -= 1;
+			lives.setText("     Lives: " + life);
+			if (life == 0) {
+				lives.setText("     Lives: " + life);
+				JOptionPane.showMessageDialog(null, "GAME OVER");
+				f.dispose();
+			}
+		}
+		if (correct) {
+			count += correctMatches;
+			correct = false;
+			System.out.println(count);
+		}
 		if (count == characters) {
 			for (int k = 0; k < characters; k++) {
 				p.remove(labels[k]);
@@ -131,24 +142,18 @@ public class HangMan implements KeyListener {
 			count = 0;
 			p.remove(lives);
 			life = 10;
+			lives.setText("     Lives: " + life);
+			correct = false;
 			play();
 			fake = true;
 
 		}
-		if (fake) {
-			life -= 1;
-			lives.setText("     Lives: " + life);
-			if (life == 0) {
-				lives.setText("     Lives: " + life);
-				JOptionPane.showMessageDialog(null, "GAME OVER");
-				f.dispose();
-			}
-		}
-		if (correct) {
-			count += 1;
-			correct = false;
-			System.out.println(count);
-		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
