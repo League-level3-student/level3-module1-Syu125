@@ -80,11 +80,10 @@ public class StringIntegerPair {
 	// 7. Complete the containsValue method so that it returns true if the
 	// passed in value is contained in the values array
 	public boolean containsValue(int value) {
-		for (int l = 0; l < values.length; l++) {
-			if (values[l] == value) {
+		for (int b = 0; b < values.length; b++) {
+			if (values[b] == value) {
 				return true;
 			}
-			return false;
 		}
 		return false;
 	}
