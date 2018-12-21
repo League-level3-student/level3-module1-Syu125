@@ -19,8 +19,10 @@ public class StringIntegerPair {
 		// the passed in String, set the value at that location to the
 		// passed in value and return from the method.
 		for (int i = 0; i < keys.length; i++) {
+			System.out.println(i);
 			if (keys[i].equals(key)) {
 				keys[i].equals(key);
+
 			}
 		}
 		// B. create a String array that is one element longer than the keys
@@ -33,9 +35,10 @@ public class StringIntegerPair {
 		i[values.length] = value;
 		// F. iterate through the keys and values and copy the elements to the new
 		// arrays
-		for (int j = 0; j < s.length; j++) {
-			System.out.println("works");
-			s[j] = keys[j];
+
+		for (int j = 0; j < keys.length; j++) {
+			s[j] = new String();
+			s[j].equals(keys[j]);
 		}
 		for (int k = 0; k < values.length; k++) {
 			i[k] = values[k];
@@ -43,9 +46,9 @@ public class StringIntegerPair {
 		// G. Set the keys and values arrays equal to the new arrays created in steps B
 		// and C.
 		for (int p = 0; p < keys.length; p++) {
-			keys[p] = s[p];
+			keys[p].equals(s[p]);
 		}
-		for (int t = 0; t < keys.length; t++) {
+		for (int t = 0; t < values.length; t++) {
 			values[t] = i[t];
 		}
 	}
@@ -53,7 +56,11 @@ public class StringIntegerPair {
 	// 5. Complete the method so it returns the value located at the passed in key.
 	// If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
+
 		Integer store = key.indexOf(key);
+		if (key.isEmpty()) {
+			return Integer.MIN_VALUE;
+		}
 		return store;
 
 	}
@@ -61,6 +68,7 @@ public class StringIntegerPair {
 	// 6. Complete the containsKey method so that it returns true if the
 	// passed in key is contained in the keys array
 	public boolean containsKey(String key) {
+
 		for (int g = 0; g < keys.length; g++) {
 			if (key.equals(keys[g])) {
 				return true;
@@ -73,9 +81,10 @@ public class StringIntegerPair {
 	// passed in value is contained in the values array
 	public boolean containsValue(int value) {
 		for (int l = 0; l < values.length; l++) {
-			if (value == values[l]) {
+			if (values[l] == value) {
 				return true;
 			}
+			return false;
 		}
 		return false;
 	}
