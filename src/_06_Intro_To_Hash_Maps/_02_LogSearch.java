@@ -2,6 +2,7 @@ package _06_Intro_To_Hash_Maps;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -34,6 +35,7 @@ public class _02_LogSearch implements ActionListener {
 	 *
 	 */
 	HashMap<Integer, String> h1 = new HashMap<Integer, String>();
+	ArrayList<Integer> identification = new ArrayList<Integer>();
 
 	static JFrame f1 = new JFrame();
 	static JPanel p1 = new JPanel();
@@ -42,14 +44,17 @@ public class _02_LogSearch implements ActionListener {
 	static JButton b3 = new JButton();
 	int id = 0;
 	int ID = 0;
+	int check = 0;
 	String name = "";
+	String list = "";
 
 	public static void main(String[] args) {
 		_02_LogSearch ls = new _02_LogSearch();
 		ls.run();
 	}
+
 	void run() {
-		
+
 		f1.setVisible(true);
 		p1.setVisible(true);
 		b1.setVisible(true);
@@ -75,19 +80,22 @@ public class _02_LogSearch implements ActionListener {
 			id = Integer.parseInt(JOptionPane.showInputDialog("Please enter your ID number."));
 			name = JOptionPane.showInputDialog("Please enter your name");
 			h1.put(id, name);
+			identification.add(id);
 		}
 		if (e.getSource() == b2) {
 			ID = Integer.parseInt(JOptionPane.showInputDialog("Please enter a valid ID."));
-			if(h1.get(ID) != null) {
+			if (h1.get(ID) != null) {
 				JOptionPane.showMessageDialog(null, "Name: " + h1.get(ID));
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "INVALID");
 			}
 		}
 		if (e.getSource() == b3) {
-			for(int i = 0; i < h1.size(); i++) {
-				JOptionPane.showMessageDialog(null, h1);
+			for (int i = 0; i < h1.size(); i++) {
+				check = identification.get(i);
+				list += check + ": " + h1.get(check) + "\n";
 			}
+			JOptionPane.showMessageDialog(null, list);
 		}
 	}
 }
