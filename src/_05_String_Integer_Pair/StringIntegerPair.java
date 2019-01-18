@@ -56,7 +56,7 @@ public class StringIntegerPair {
 	// 5. Complete the method so it returns the value located at the passed in key.
 	// If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
-System.out.println("works");
+		System.out.println("works");
 		Integer store = key.length();
 		if (key.isEmpty()) {
 			return Integer.MIN_VALUE;

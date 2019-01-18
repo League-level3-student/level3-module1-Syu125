@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 
 public class _04_RemovingStuffFromArrayLists {
+	static String sentence = "";
+	static String letters = "";
 
 	public static void main(String[] args) {
 
@@ -42,7 +44,7 @@ public class _04_RemovingStuffFromArrayLists {
 			}
 		}
 
-		System.out.println(stuffIFoundInTheYard.size()-1); // should be 2
+		System.out.println(stuffIFoundInTheYard.size() - 1); // should be 2
 
 		ArrayList<Character> truth = new ArrayList<Character>();
 		truth.add('c');
@@ -77,13 +79,18 @@ public class _04_RemovingStuffFromArrayLists {
 		truth.add('r');
 		truth.add('#');
 		/* TODO 2: Remove the hash symbols and print out the truth. */
-		for(int i = 0; i < truth.size() ; i++) {
+		for (int i = truth.size() - 1; i > 0; i--) {
 			Character letter = truth.get(i);
-			if(letter == '#') {
+			System.out.println(truth.get(i));
+			if (letter == '#') {
 				truth.remove(i);
+			} else {
+				letters = letter.toString();
+				sentence += letters;
+				letters = "";
 			}
-			
-	}
-		System.out.println(truth);
+
+		}
+		System.out.println(sentence);
 	}
 }
